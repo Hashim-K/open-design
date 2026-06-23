@@ -43,7 +43,7 @@ od_require_repo() {
 
 od_channel_appimage() {
   case "${1:-}" in
-    stable|dev) printf '%s/Open-Design.%s.AppImage\n' "$OPEN_DESIGN_APP_DIR" "$1" ;;
+    stable|dev) printf '%s/Open-Design.%s.AppImage\n' "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR" "$1" ;;
     *) od_die "unknown channel: ${1:-}" ;;
   esac
 }
@@ -104,6 +104,34 @@ od_archive_unreferenced_appimages() {
   done < <(find "$OPEN_DESIGN_APP_DIR" -maxdepth 1 -type f -name 'Open-Design*.AppImage' -print0 2>/dev/null)
 }
 
+od_migrate_top_level_channel_appimages() {
+  local channel old_link new_link old_target migrated_target
+  mkdir -p "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR"
+
+  for channel in stable dev; do
+    old_link="$OPEN_DESIGN_APP_DIR/Open-Design.$channel.AppImage"
+    new_link="$(od_channel_appimage "$channel")"
+    [[ ! -e "$new_link" && -e "$old_link" ]] || continue
+
+    old_target="$(od_realpath "$old_link")"
+    [[ -n "$old_target" && -f "$old_target" ]] || continue
+
+    migrated_target="$old_target"
+    if [[ "$old_target" == "$OPEN_DESIGN_APP_DIR"/Open-Design.*.AppImage ]]; then
+      migrated_target="$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR/$(basename "$old_target")"
+      if [[ "$old_target" != "$migrated_target" ]]; then
+        if [[ -e "$migrated_target" ]]; then
+          rm -f "$old_target"
+        else
+          mv "$old_target" "$migrated_target"
+        fi
+      fi
+    fi
+
+    ln -sfn "$migrated_target" "$new_link"
+  done
+}
+
 od_remove_stale_desktop_entries() {
   local file
   shopt -s nullglob
@@ -115,6 +143,16 @@ od_remove_stale_desktop_entries() {
     rm -f "$file"
   done
   shopt -u nullglob
+}
+
+od_remove_top_level_channel_appimages() {
+  if [[ "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR" == "$OPEN_DESIGN_APP_DIR" ]]; then
+    return
+  fi
+  rm -f \
+    "$OPEN_DESIGN_APP_DIR/Open-Design.stable.AppImage" \
+    "$OPEN_DESIGN_APP_DIR/Open-Design.dev.AppImage" \
+    "$OPEN_DESIGN_APP_DIR/Open-Design.default.AppImage"
 }
 
 od_remove_stale_icons() {

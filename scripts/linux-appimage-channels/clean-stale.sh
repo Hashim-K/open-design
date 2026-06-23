@@ -26,6 +26,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 od_remove_stale_desktop_entries
+od_remove_top_level_channel_appimages
 od_remove_stale_icons
 
 if [[ "$archive_old" == true ]]; then

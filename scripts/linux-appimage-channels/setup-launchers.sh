@@ -26,6 +26,8 @@ done
 
 mkdir -p "$OPEN_DESIGN_APP_DIR" "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR" "$OPEN_DESIGN_BIN_DIR" "$OPEN_DESIGN_DESKTOP_DIR" "$OPEN_DESIGN_ICON_BASE"
 
+od_migrate_top_level_channel_appimages
+
 stable_appimage="$(od_channel_appimage stable)"
 dev_appimage="$(od_channel_appimage dev)"
 
@@ -44,6 +46,7 @@ ln -sfn "$stable_appimage" "$(od_channel_bin_link stable)"
 ln -sfn "$dev_appimage" "$(od_channel_bin_link dev)"
 
 od_remove_stale_desktop_entries
+od_remove_top_level_channel_appimages
 od_remove_stale_icons
 
 if [[ -f "$OPEN_DESIGN_ICON_SRC" ]]; then
