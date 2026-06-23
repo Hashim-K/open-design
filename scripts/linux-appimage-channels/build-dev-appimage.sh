@@ -84,6 +84,8 @@ install -m 0755 "$appimage_path" "$target"
 ln -sfn "$target" "$(od_channel_appimage dev)"
 ln -sfn "$(od_channel_appimage dev)" "$(od_channel_bin_link dev)"
 
+od_migrate_top_level_channel_appimages
+
 if [[ ! -e "$(od_channel_appimage stable)" ]]; then
   ln -sfn "$target" "$(od_channel_appimage stable)"
 fi

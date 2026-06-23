@@ -4,7 +4,7 @@ This directory manages a local two-channel Linux AppImage setup:
 
 - `Open Design Stable` handles `od://`
 - `Open Design Dev` handles `od-dev://`
-- versioned channel AppImages live under `$HOME/Applications/OpenDesign/appimages`
+- channel symlinks and versioned AppImages live under `$HOME/Applications/OpenDesign/appimages`
 - both channels share `$HOME/Applications/OpenDesign/runtime/linux/namespaces/default/data`
 
 From the repo root:
