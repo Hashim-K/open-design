@@ -10,6 +10,7 @@ printf '\n'
 printf 'Repo:        %s\n' "$OPEN_DESIGN_REPO"
 printf 'Namespace:   %s\n' "$OPEN_DESIGN_NAMESPACE"
 printf 'Install:     %s\n' "$OPEN_DESIGN_INSTALL_ROOT"
+printf 'AppImages:   %s\n' "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR"
 printf 'Data:        %s\n' "$OPEN_DESIGN_DATA_ROOT"
 printf '\n'
 

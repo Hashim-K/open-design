@@ -35,7 +35,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 od_require_repo
-mkdir -p "$OPEN_DESIGN_APP_DIR" "$OPEN_DESIGN_INSTALL_ROOT"
+mkdir -p "$OPEN_DESIGN_APP_DIR" "$OPEN_DESIGN_INSTALL_ROOT" "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR"
 
 cd "$OPEN_DESIGN_REPO"
 
@@ -79,7 +79,7 @@ appimage_path="$(
 
 [[ -f "$appimage_path" ]] || od_die "build did not produce an AppImage at: $appimage_path"
 
-target="$OPEN_DESIGN_APP_DIR/Open-Design.dev-$version-$commit-$timestamp.AppImage"
+target="$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR/Open-Design.dev-$version-$commit-$timestamp.AppImage"
 install -m 0755 "$appimage_path" "$target"
 ln -sfn "$target" "$(od_channel_appimage dev)"
 ln -sfn "$(od_channel_appimage dev)" "$(od_channel_bin_link dev)"

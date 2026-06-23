@@ -24,7 +24,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-mkdir -p "$OPEN_DESIGN_APP_DIR" "$OPEN_DESIGN_BIN_DIR" "$OPEN_DESIGN_DESKTOP_DIR" "$OPEN_DESIGN_ICON_BASE"
+mkdir -p "$OPEN_DESIGN_APP_DIR" "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR" "$OPEN_DESIGN_BIN_DIR" "$OPEN_DESIGN_DESKTOP_DIR" "$OPEN_DESIGN_ICON_BASE"
 
 stable_appimage="$(od_channel_appimage stable)"
 dev_appimage="$(od_channel_appimage dev)"
