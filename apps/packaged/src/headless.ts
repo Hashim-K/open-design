@@ -122,6 +122,7 @@ async function main(): Promise<void> {
   });
 
   const sidecars = await startPackagedSidecars(runtime, paths, {
+    appChannel: process.env.OD_APP_CHANNEL ?? process.env.OD_RELEASE_CHANNEL ?? null,
     appVersion: activeConfig.appVersion,
     amrProfile: activeConfig.amrProfile,
     daemonCliEntry: activeConfig.daemonCliEntry,
