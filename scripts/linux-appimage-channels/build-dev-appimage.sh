@@ -65,7 +65,13 @@ od_log "building Dev AppImage from $OPEN_DESIGN_REPO@$commit"
 appimage_path="$(
   node -e '
     const fs = require("fs");
-    const payload = JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
+    const output = fs.readFileSync(process.argv[1], "utf8");
+    const marker = "{\n  \"appImagePath\"";
+    const start = output.lastIndexOf(marker);
+    if (start < 0) {
+      throw new Error("tools-pack output did not contain a final appImagePath JSON payload");
+    }
+    const payload = JSON.parse(output.slice(start));
     if (!payload.appImagePath) process.exit(2);
     console.log(payload.appImagePath);
   ' "$json_file"
