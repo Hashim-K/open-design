@@ -62,7 +62,7 @@ Type=Application
 Name=Open Design Stable
 GenericName=Open Design
 Comment=Open Design stable build
-Exec=env -u APPIMAGE -u APPDIR -u ELECTRON_RUN_AS_NODE -u XDG_CONFIG_HOME APPIMAGELAUNCHER_DISABLE=1 OD_PACKAGED_NAMESPACE=$OPEN_DESIGN_NAMESPACE $stable_appimage --appimage-extract-and-run %U
+Exec=env -u APPIMAGE -u APPDIR -u ELECTRON_RUN_AS_NODE -u XDG_CONFIG_HOME APPIMAGELAUNCHER_DISABLE=1 OD_PACKAGED_NAMESPACE=$OPEN_DESIGN_NAMESPACE OD_APP_CHANNEL=stable $stable_appimage --appimage-extract-and-run %U
 Icon=open-design-stable
 Categories=Development;
 StartupWMClass=Open Design
@@ -77,7 +77,7 @@ Type=Application
 Name=Open Design Dev
 GenericName=Open Design
 Comment=Open Design development build
-Exec=env -u APPIMAGE -u APPDIR -u ELECTRON_RUN_AS_NODE -u XDG_CONFIG_HOME APPIMAGELAUNCHER_DISABLE=1 OD_PACKAGED_NAMESPACE=$OPEN_DESIGN_NAMESPACE $dev_appimage --appimage-extract-and-run %U
+Exec=env -u APPIMAGE -u APPDIR -u ELECTRON_RUN_AS_NODE -u XDG_CONFIG_HOME APPIMAGELAUNCHER_DISABLE=1 OD_PACKAGED_NAMESPACE=$OPEN_DESIGN_NAMESPACE OD_APP_CHANNEL=dev $dev_appimage --appimage-extract-and-run %U
 Icon=open-design-dev
 Categories=Development;
 StartupWMClass=Open Design

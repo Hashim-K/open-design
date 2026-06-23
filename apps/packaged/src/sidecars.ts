@@ -334,6 +334,7 @@ function createPackagedDaemonManagedPathEnv(
 }
 
 export type PackagedDaemonSpawnEnvOptions = {
+  appChannel?: string | null;
   appVersion: string | null;
   amrProfile?: string | null;
   daemonCliEntry: string | null;
@@ -382,6 +383,9 @@ export function buildPackagedDaemonSpawnEnv(
     ...(options.amrProfile == null || options.amrProfile.length === 0
       ? {}
       : { OPEN_DESIGN_AMR_PROFILE: options.amrProfile }),
+    ...(options.appChannel == null || options.appChannel.length === 0
+      ? {}
+      : { OD_APP_CHANNEL: options.appChannel }),
     ...(options.appVersion == null ? {} : { OD_APP_VERSION: options.appVersion }),
     ...(options.telemetryRelayUrl == null || options.telemetryRelayUrl.length === 0
       ? {}
@@ -491,6 +495,7 @@ export async function startPackagedSidecars(
   runtime: SidecarRuntimeContext<SidecarStamp>,
   paths: PackagedNamespacePaths,
   options: {
+    appChannel: string | null;
     appVersion: string | null;
     amrProfile: string | null;
     daemonCliEntry: string | null;
@@ -541,6 +546,7 @@ export async function startPackagedSidecars(
       app: APP_KEYS.DAEMON,
       entryPath: options.daemonSidecarEntry ?? resolveSidecarEntry("@open-design/daemon", "sidecar"),
       env: buildPackagedDaemonSpawnEnv(paths, {
+        appChannel: options.appChannel,
         appVersion: options.appVersion,
         amrProfile: options.amrProfile,
         daemonCliEntry: options.daemonCliEntry,

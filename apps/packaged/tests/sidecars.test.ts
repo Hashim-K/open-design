@@ -343,6 +343,17 @@ describe('buildPackagedDaemonSpawnEnv', () => {
     expect(env.OD_LEGACY_DATA_DIR).toBeUndefined();
   });
 
+  it('forwards the desktop app channel to the daemon when set', () => {
+    const env = buildPackagedDaemonSpawnEnv(fakePaths(), {
+      appChannel: 'dev',
+      appVersion: '1.2.3',
+      daemonCliEntry: null,
+      legacyDataDir: null,
+      requireDesktopAuth: true,
+    });
+    expect(env.OD_APP_CHANNEL).toBe('dev');
+  });
+
   it('omits OD_REQUIRE_DESKTOP_AUTH entirely when requireDesktopAuth=false (headless)', () => {
     const env = buildPackagedDaemonSpawnEnv(fakePaths(), {
       appVersion: null,
