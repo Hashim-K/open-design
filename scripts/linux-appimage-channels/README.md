@@ -4,6 +4,7 @@ This directory manages a local two-channel Linux AppImage setup:
 
 - `Open Design Stable` handles `od://`
 - `Open Design Dev` handles `od-dev://`
+- versioned channel AppImages live under `$HOME/Applications/OpenDesign/appimages`
 - both channels share `$HOME/Applications/OpenDesign/runtime/linux/namespaces/default/data`
 
 From the repo root:
@@ -50,6 +51,7 @@ Environment overrides:
 
 ```bash
 OPEN_DESIGN_INSTALL_ROOT=$HOME/Applications/OpenDesign
+OPEN_DESIGN_CHANNEL_APPIMAGE_DIR=$HOME/Applications/OpenDesign/appimages
 OPEN_DESIGN_NAMESPACE=default
 OPEN_DESIGN_BACKUP_ROOT=$PWD/.tmp/open-design-data-backups
 ```

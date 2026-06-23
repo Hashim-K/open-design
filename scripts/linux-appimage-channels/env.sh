@@ -14,6 +14,7 @@ OPEN_DESIGN_REPO="${OPEN_DESIGN_REPO:-$OPEN_DESIGN_REPO_ROOT}"
 OPEN_DESIGN_NAMESPACE="${OPEN_DESIGN_NAMESPACE:-default}"
 OPEN_DESIGN_APP_DIR="${OPEN_DESIGN_APP_DIR:-$HOME/Applications}"
 OPEN_DESIGN_INSTALL_ROOT="${OPEN_DESIGN_INSTALL_ROOT:-$OPEN_DESIGN_APP_DIR/OpenDesign}"
+OPEN_DESIGN_CHANNEL_APPIMAGE_DIR="${OPEN_DESIGN_CHANNEL_APPIMAGE_DIR:-$OPEN_DESIGN_INSTALL_ROOT/appimages}"
 OPEN_DESIGN_DATA_ROOT="${OPEN_DESIGN_DATA_ROOT:-$OPEN_DESIGN_INSTALL_ROOT/runtime/linux/namespaces/$OPEN_DESIGN_NAMESPACE/data}"
 OPEN_DESIGN_ARCHIVE_DIR="${OPEN_DESIGN_ARCHIVE_DIR:-$OPEN_DESIGN_INSTALL_ROOT/archive/appimages}"
 OPEN_DESIGN_BACKUP_ROOT="${OPEN_DESIGN_BACKUP_ROOT:-$OPEN_DESIGN_REPO/.tmp/open-design-data-backups}"
@@ -73,7 +74,7 @@ od_realpath() {
 }
 
 od_latest_versioned_appimage() {
-  find "$OPEN_DESIGN_APP_DIR" -maxdepth 1 -type f -name 'Open-Design*.AppImage' \
+  find "$OPEN_DESIGN_CHANNEL_APPIMAGE_DIR" "$OPEN_DESIGN_APP_DIR" -maxdepth 1 -type f -name 'Open-Design*.AppImage' \
     ! -name 'Open-Design.stable.AppImage' \
     ! -name 'Open-Design.dev.AppImage' \
     ! -name 'Open-Design.default.AppImage' \
